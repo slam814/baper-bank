@@ -1,33 +1,71 @@
 document.getElementById('btn-deposit').addEventListener('click', function(){
-    const depositFild = document.getElementById('deposit-field');
-    const depositFildString = depositFild.value;
-   const newDepositAmount = parseFloat(depositFildString);
 
 
-   // if deposit NaN
-   if(isNaN(newDepositAmount)){
-    const alartDepositMessage = document.getElementById('isNanDeposit');
-    alartDepositMessage.innerText = 'Please Enter a valid Amount'
-    return
-   }else{
-    const alartDepositMessage = document.getElementById('isNanDeposit');
-    alartDepositMessage.innerText = '';
-   }
+const newDepositAmount =  getInputFildValueById('deposit-field');
+// console.log(newDepositAmount);
 
-   // clean deposit fild
-   depositFild.value = '';
-   
-   const depositTotalElement = document.getElementById('deposit-total');
-   const previousDepositTotalString = depositTotalElement.innerText;
-   const previousDepositTotal = parseFloat(previousDepositTotalString);
-   const currentDepositTotal = previousDepositTotal + newDepositAmount;
-   depositTotalElement.innerText = currentDepositTotal;
-   //5
-   const balanceTotelElement = document.getElementById('balance-total');
-   const previousBalanceTotalString = balanceTotelElement.innerText;
-   const previousBalanceTotal = parseFloat(previousBalanceTotalString);
+// worning masage input in not Number
 
-   const currentBalanceTotal = previousBalanceTotal + newDepositAmount;
-   balanceTotelElement.innerText = currentBalanceTotal;
+const worningMessage = document.getElementById('isNanDeposit');
 
+    if(isNaN(newDepositAmount)){
+        worningMessage.innerText = 'Please Enter a Valid Amount.'
+        return;
+    }else{
+        worningMessage.innerText = '';
+       
+    }
+    
+
+
+
+const previusDepositAmount = getTextElementValueById('deposit-total');
+
+
+const depositTotal = newDepositAmount + previusDepositAmount;
+
+// set deposit Total value 
+
+setElementValueById('deposit-total', depositTotal);
+
+///
+
+const previousTotal = getTextElementValueById('balance-total');
+const newBalanceTotal = previousTotal + newDepositAmount;
+setElementValueById('balance-total', newBalanceTotal);
+
+
+
+//     // Get Input value
+//     const inputFildElemnt = document.getElementById('deposit-field');
+//     const inputDepositString = inputFildElemnt.value;
+//     const newDepositAmount = parseFloat(inputDepositString);
+    
+// // worning masage input in not Number
+// const worningMessage = document.getElementById('isNanDeposit');
+
+//     if(isNaN(newDepositAmount)){
+//       worningMessage.innerText = 'Please Enter a Valid Amount.'
+//       return;
+//     }else{
+//         worningMessage.innerText ='';
+//         inputFildElemnt.value = '';
+//     }
+
+//     // Add total deposit
+
+//     const totalDepositElement = document.getElementById('deposit-total');
+//     const totalDepositString = totalDepositElement.innerText;
+//     const previusDepositAmount = parseFloat(totalDepositString);
+//     const totalDepositAmount = previusDepositAmount + newDepositAmount;
+//     totalDepositElement.innerText = totalDepositAmount;
+
+
+//     // add total balance 
+
+//     const totalBalanceElement = document.getElementById('balance-total');
+//     const totalBalanceString = totalBalanceElement.innerText;
+//     const totalBalanceAmount = parseFloat(totalBalanceString);
+//     const totalBalance = totalBalanceAmount + newDepositAmount;
+//     totalBalanceElement.innerText = totalBalance;
 })

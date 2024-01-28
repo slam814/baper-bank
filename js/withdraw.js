@@ -1,32 +1,42 @@
 document.getElementById('btn-withdraw').addEventListener('click', function(){
-    const withdrawFildElemnt = document.getElementById('withdraw-field');
-    const newWithdrawAmountString = withdrawFildElemnt.value;
-    const newWithdrawAmount = parseFloat(newWithdrawAmountString);
-    
 
-    if(isNaN(newWithdrawAmount)){
-        const WorningMessage = document.getElementById('isNanWithdraw');
-        WorningMessage.innerText = 'Please Enter a valid Amount';
-        return
+  
+
+    const newWithdeawAmount = getInputFildValueById('withdraw-field');
+
+// worning masage input in not Number
+
+const worningMessage = document.getElementById('isNanWithdraw');
+
+    if(isNaN(newWithdeawAmount)){
+        worningMessage.innerText = 'Please Enter a Valid Amount.'
+        return;
     }else{
-        const WorningMessage = document.getElementById('isNanWithdraw');
-        WorningMessage.innerText = '';
+        worningMessage.innerText = '';
+       
     }
-    // clear withdraw
-     withdrawFildElemnt.value = '';
+    
+    const preveusWithdrawTotal = getTextElementValueById('withdraw-total');
+    const newWithrawTotal = preveusWithdrawTotal + newWithdeawAmount;
+
+    /// set balance
+    const previousBalance = getTextElementValueById('balance-total');
+    const courentBalance = previousBalance - newWithdeawAmount;
 
 
-     // add Total withdow
-     const withdowTotalElement = document.getElementById('withdraw-total');
-     const withdowTotalString = withdowTotalElement.innerText;
-     const windowTotalAmount = parseFloat(withdowTotalString);
-     const previousWithdrawTotal = newWithdrawAmount + windowTotalAmount;
-     withdowTotalElement.innerText = previousWithdrawTotal;
+    if(previousBalance < newWithdeawAmount){
+        worningMessage.innerText = 'Insufficient balance.'
+        return
+    }
 
-     // Total balance
-     const totalBalanceElement = document.getElementById('balance-total');
-     const totalBalanceString = totalBalanceElement.innerText;
-     const totalBalanceAmount = parseFloat(totalBalanceString);
-     const totalBalance = totalBalanceAmount - newWithdrawAmount;
-     totalBalanceElement.innerText = totalBalance;
+    
+    // set withraw total
+
+    setElementValueById('withdraw-total', newWithrawTotal);
+
+
+    setElementValueById('balance-total', courentBalance);
+
+  
+
 })
